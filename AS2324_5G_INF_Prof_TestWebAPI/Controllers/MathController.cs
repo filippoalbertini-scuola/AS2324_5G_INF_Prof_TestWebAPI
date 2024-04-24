@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AS2324_5G_INF_Prof_TestWebAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AS2324_5G_INF_Prof_TestWebAPI.Controllers
 {
@@ -45,6 +46,28 @@ namespace AS2324_5G_INF_Prof_TestWebAPI.Controllers
             }
 
             return Json(new { output = res, status = status_result, message = message });
+        }
+
+        [HttpGet("GetRandomNumbers")]
+        public JsonResult GetRandomNumbers(int numero)
+        {
+            string status_result = "OK";
+            string message = "Valore calcolabile";
+
+            var numbers = new Number[numero];
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                // istanzia l'oggetto
+                numbers[i] = new Number();
+
+                // posiziona il valore causale
+                numbers[i].Value = Random.Shared.Next(-100, 100);
+            }
+
+
+            return Json(new { output = numbers, status = status_result, message = message });
+
         }
     }
 
